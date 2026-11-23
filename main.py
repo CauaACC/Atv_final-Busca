@@ -1,9 +1,14 @@
 """Script de demonstração — útil para depurar manualmente."""
 
+import sys
+
 from puzzle.state import State
 from algorithms.bfs import BFS
 from algorithms.dfs import DFS
 from algorithms.a_star import AStar
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
 
 
 def print_result(name: str, result):
@@ -21,7 +26,7 @@ def print_result(name: str, result):
 
 
 if __name__ == "__main__":
-    initial = State((2, 8, 3, 1, 6, 4, 7, 0, 5))   # ~20 movimentos até a solução
+    initial = State((2, 6, 8, 7, 1, 4, 0, 5, 3))   # 20 movimentos até a solução
 
     print("Estado inicial:")
     print(initial)
