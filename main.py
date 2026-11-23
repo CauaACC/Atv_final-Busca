@@ -11,7 +11,21 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
 
-def print_result(name: str, result):
+def print_path(result):
+    """Desenha cada etapa do caminho da solução: estado + ação aplicada."""
+    if not result.found:
+        return
+    states = result.solution.path()
+    print("\nEtapas da busca:")
+    for i, state in enumerate(states):
+        if i == 0:
+            print(f"\nPasso {i} (inicial):")
+        else:
+            print(f"\nPasso {i} — ação: {state.action}")
+        print(state)
+
+
+def print_result(name: str, result, show_steps: bool = True):
     print(f"\n{'='*40}")
     print(f"Algoritmo : {name}")
     if result.found:
@@ -23,6 +37,8 @@ def print_result(name: str, result):
     print(f"Expandidos: {result.nodes_expanded}")
     print(f"Gerados   : {result.nodes_generated}")
     print(f"Fronteira : {result.max_frontier_size} (máx)")
+    if show_steps:
+        print_path(result)
 
 
 if __name__ == "__main__":
